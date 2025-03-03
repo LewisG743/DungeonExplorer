@@ -11,7 +11,10 @@ namespace DungeonExplorer
         public Game()
         {
             // Initialize the game with one room and one player
+            Room room = new Room("Starting room. This room has nothing in it and is safe from enemies");
+            currentRoom = room;
 
+            Player player1 = new Player("Input", 100);
         }
         public void Start()
         {
