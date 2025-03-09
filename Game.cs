@@ -23,7 +23,8 @@ namespace DungeonExplorer
             while (playing)
             {
                 Console.WriteLine("Welcome to Dungeon Explorer");
-                
+                Console.WriteLine("");
+
             }
         }
     }

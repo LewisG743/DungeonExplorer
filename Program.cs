@@ -17,37 +17,20 @@ namespace DungeonExplorer
                 Console.WriteLine("Start a new game - S");
                 Console.WriteLine("Quit game - Q");
                 bool validInput = false;
+                string input = "";
                 while (validInput == false)
                 {
-                    string input = Console.ReadLine();
-                    if (input != "S" || input != "Q")
-                    {
-
-                    }
-                    else
+                    Console.WriteLine("while loop");
+                    input = Console.ReadLine();
+                    if (input.ToUpper() == "S" || input.ToUpper() == "Q")
                     {
                         validInput = true;
                     }
+                    else
+                    {
+                        
+                    }
                 }
-                if (input == "S")
-                {
-                    Game game = new Game();
-                    game.Start();
-                }else
-            }
-            Console.WriteLine("Press any key to exit");
-            Console.ReadKey();
-        }
-
-        static void Menu()
-        {
-            Console.WriteLine("Welcome to Dungeon Explorer");
-            Console.WriteLine("Start a new game - S");
-            Console.WriteLine("Quit game - Q");
-            string input = Console.ReadLine();
-            bool valid = false;
-            while (valid == false)
-            {
                 if (input.ToUpper() == "S")
                 {
                     Game game = new Game();
@@ -55,13 +38,11 @@ namespace DungeonExplorer
                 }
                 else if (input.ToUpper() == "Q")
                 {
-                    return;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input");
+                    break;
                 }
             }
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
         }
     }
 }
