@@ -14,7 +14,7 @@ namespace DungeonExplorer
             Name = name;
             Health = health;
         }
-        public void PickUpItem(string item)
+        public void PickUpItem(Item item)
         {
             if (inventory.Count < 9)
             {
