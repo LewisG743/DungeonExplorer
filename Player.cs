@@ -40,8 +40,9 @@ namespace DungeonExplorer
             }
         }
 
-        public void Heal(int healthHealed)
+        public void Heal(Potion healthPotion)
         {
+            int healthHealed = healthPotion.GetHealthStored();
             if(healthHealed > 0)
             {
                 health += healthHealed;

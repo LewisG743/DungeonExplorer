@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DungeonExplorer
 {
@@ -11,7 +12,29 @@ namespace DungeonExplorer
         public Room(string description)
         {
             this.description = description;
+            
+        }
 
+        private void SetItems()
+        {
+            Random rGen = new Random();
+            for (int i = 0; i < 5; i++)
+            {
+                if(rGen.Next(100) > 40) // 0 to 99
+                {
+                    switch (rGen.Next(2))
+                    {
+                        case 0:
+                            Weapon weapon = new Weapon(0, "Sword", 10);
+                            this.Items.Add(weapon);
+                            break;
+                        case 1:
+                            Potion potion = new Potion(0, "Health Potion");
+                            this.Items.Add(potion);
+                            break;
+                    }
+                } 
+            }
         }
 
         public string GetDescription()
@@ -23,5 +46,7 @@ namespace DungeonExplorer
         {
             return doors;
         }
+
+
     }
 }
