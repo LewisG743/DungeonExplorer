@@ -19,11 +19,11 @@ namespace DungeonExplorer
             if (inventory.Count < 10) // Checks to see if inventory is full
             {
                 inventory.Add(item); // Adds the item found to inventory
-                foreach (Item x in room.GetItems()) // Loops through all the items in the room
+                for (int i = room.GetItems().Count - 1; i >= 0; i--)
                 {
-                    if (x.GetID() == item.GetID()) // Checks to see if the items are the same item
+                    if (room.GetItems()[i].GetID() == item.GetID()) // Checks to see if the items are the same item
                     {
-                        room.GetItems().Remove(x); // removes the item from the room 
+                        room.GetItems().Remove(room.GetItems()[i]); // removes the item from the room 
                     }
                 }
             }
@@ -34,6 +34,10 @@ namespace DungeonExplorer
         }
         public string InventoryContents()
         {
+            foreach (Item item in inventory)
+            {
+                Console.WriteLine(item.GetItemName());
+            }
             return string.Join(", ", inventory);
         }
 

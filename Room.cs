@@ -8,39 +8,44 @@ namespace DungeonExplorer
         private string description;
         private List<char> doors;
         private List<Item> Items = new List<Item>();
+        public bool hasEnemy { get; }
 
         public Room(string description)
         {
             this.description = description;
+            this.hasEnemy = false;
             SetItems();
             SetDoors();
         }
 
         private void SetItems()
         {
+            int count = 0;
             Random rGen = new Random();
             for (int i = 0; i < 5; i++)
             {
-                if(rGen.Next(100) > 40) // 0 to 99
+                int random = rGen.Next(100);
+                if (random > 40) // 0 to 99
                 {
                     switch (rGen.Next(2))
                     {
                         case 0:
-                            Weapon weapon = new Weapon(0, "Sword", 10);
+                            Weapon weapon = new Weapon(count, "Sword", 10);
                             this.Items.Add(weapon);
                             break;
                         case 1:
-                            Potion potion = new Potion(0, "Health Potion");
+                            Potion potion = new Potion(count, "Health Potion");
                             this.Items.Add(potion);
                             break;
                     }
-                } 
+                }
+                count++;
             }
         }
 
         private void SetDoors()
         {
-
+            this.doors = new List<char>();
         }
 
         public string GetDescription()
