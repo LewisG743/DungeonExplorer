@@ -20,7 +20,6 @@ namespace DungeonExplorer
                 string input = "";
                 while (validInput == false)
                 {
-                    Console.WriteLine("while loop");
                     input = Console.ReadLine();
                     if (input.ToUpper() == "S" || input.ToUpper() == "Q")
                     {

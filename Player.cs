@@ -5,18 +5,20 @@ namespace DungeonExplorer
 {
     public class Player
     {
-        public string Name { get; private set; }
-        public int Health { get; private set; }
+        public string name { get; }
+
+        private int health { get; set; }
+
         private List<Item> inventory = new List<Item>();
 
-        public Player(string name, int health) 
+        public Player(string Name, int initialHealth) 
         {
-            Name = name;
-            Health = health;
+            name = Name;
+            health = initialHealth;
         }
         public void PickUpItem(Item item)
         {
-            if (inventory.Count < 9)
+            if (inventory.Count < 10)
             {
                 inventory.Add(item);
             }
@@ -28,6 +30,22 @@ namespace DungeonExplorer
         public string InventoryContents()
         {
             return string.Join(", ", inventory);
+        }
+
+        public void TakeDamage(int damage)
+        {
+            if (damage > 0)
+            {
+                health -= damage;
+            }
+        }
+
+        public void Heal(int healthHealed)
+        {
+            if(healthHealed > 0)
+            {
+                health += healthHealed;
+            }
         }
     }
 }
