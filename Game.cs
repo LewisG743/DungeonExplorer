@@ -25,6 +25,7 @@ namespace DungeonExplorer
                 Console.WriteLine("Welcome to Dungeon Explorer");
                 Console.WriteLine("Room description - D");
                 Console.WriteLine("Search for doors - E");
+                Console.ReadLine();
 
             }
         }

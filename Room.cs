@@ -7,12 +7,13 @@ namespace DungeonExplorer
     {
         private string description;
         private List<char> doors;
-        private List<Item> Items;
+        private List<Item> Items = new List<Item>();
 
         public Room(string description)
         {
             this.description = description;
-            
+            SetItems();
+            SetDoors();
         }
 
         private void SetItems()
@@ -37,6 +38,11 @@ namespace DungeonExplorer
             }
         }
 
+        private void SetDoors()
+        {
+
+        }
+
         public string GetDescription()
         {
             return description;
@@ -47,6 +53,10 @@ namespace DungeonExplorer
             return doors;
         }
 
+        public List<Item> GetItems()
+        {
+            return Items;
+        }
 
     }
 }

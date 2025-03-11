@@ -16,6 +16,16 @@ namespace DungeonExplorer
             this.id = id;
             this.itemName = itemName;
         }
+
+        public int GetID()
+        {
+            return id;
+        }
+
+        public string GetItemName()
+        {
+            return itemName;
+        }
     }
 
     public class Potion : Item // Inheritance
