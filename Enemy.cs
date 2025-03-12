@@ -34,11 +34,11 @@ namespace DungeonExplorer
             return damage;
         }
 
-        public Item DropItem(Room room)
+        public Item DropItem(Room room) // Drops item after death
         {
             Random rGen = new Random();
             int count = room.GetItems().Count - 1;
-            if (rGen.Next(100) > 30)
+            if (rGen.Next(100) > 30) // Randomly chooses between Meat and Potion to drop
             {
                 Item meat = new Item(count, "Meat");
                 return meat;

@@ -61,7 +61,7 @@ namespace DungeonExplorer
                             Console.WriteLine(doorMessage);
                         }
                         break;
-                    case "3": // Checks if there is an enemy if not tells the user there are no enemies
+                    case "3": // Checks if there is an enemy if not tells the user there are no enemies if there is then starts a battle with the enter battle function
                         if(currentRoom.hasEnemy == true)
                         {
                             EnterBattle(currentRoom.GetEnemy(), player);
@@ -117,12 +117,12 @@ namespace DungeonExplorer
             }
         }
 
-        private void EnterBattle(Enemy enemy, Player player)
+        private void EnterBattle(Enemy enemy, Player player) // Starts a battle with the enemy in the current room
         {
             bool hasRanAway = false;
             bool inBattle = true;
             Console.WriteLine($"A {enemy.name} has appeared");
-            while (inBattle)
+            while (inBattle) // Loops while in battle
             {
                 Console.WriteLine("What is your action");
                 Console.WriteLine("Attack with a weapon: 1");
@@ -133,40 +133,40 @@ namespace DungeonExplorer
                 Console.WriteLine($"The {enemy.name} has attacked you");
                 Console.WriteLine($"You have {player.GetHealth()} health left");
 
-                switch (Console.ReadLine())
+                switch (Console.ReadLine()) // Does action depending on the input
                 {
-                    case "1":
-                        if (player.InventoryItems().Count == 0)
+                    case "1": //Attack with a weapon
+                        if (player.InventoryItems().Count == 0) // If there are no items in inventory display you have no items
                         {
                             Console.WriteLine("You have no items");
                             break;
                         }
                         Console.WriteLine("Choose a weapon to attack with:");
                         List<string> temp1 = new List<string>();
-                        for (int i = 1; i <= player.InventoryItems().Count; i++)
+                        for (int i = 1; i <= player.InventoryItems().Count; i++) // Creates numbers for the number of items in inventory
                         {
                             temp1.Add(i.ToString());
                         }
                         int count = 1;
                         foreach (Item x in player.InventoryItems())
                         {
-                            Console.WriteLine($"{x.GetItemName()}: {count}");
+                            Console.WriteLine($"{x.GetItemName()}: {count}"); // Displays each items with a number next to them which are the same as in the temp1 list
                             count++;
                         }
                         bool valid1 = false;
-                        while (!valid1)
+                        while (!valid1) // Loops while not a valid input
                         {
                             string choice = Console.ReadLine();
-                            if (!temp1.Contains(choice))
+                            if (!temp1.Contains(choice)) // Checks to see if the number is valid for the number of items in the inventory
                             {
                                 Console.WriteLine("Invalid input");
                             }
                             else
                             {
-                                if (player.InventoryItems()[int.Parse(choice)-1] is Weapon)
+                                if (player.InventoryItems()[int.Parse(choice)-1] is Weapon) // Checks to see if the item selected is a weapon
                                 {
                                     Weapon myWeapon = (Weapon)player.InventoryItems()[int.Parse(choice) - 1];
-                                    enemy.TakeDamage(myWeapon.GetWeaponDamage());
+                                    enemy.TakeDamage(myWeapon.GetWeaponDamage()); // Deals damage to the enemy with the weapon and displays the info
                                     Console.WriteLine($"You have dealt {myWeapon.GetWeaponDamage()} damage to the {enemy.name}");
                                     valid1 = true;
                                 }
@@ -177,38 +177,38 @@ namespace DungeonExplorer
                             }
                         }
                         break;
-                    case "2":
-                        if (player.InventoryItems().Count == 0)
+                    case "2": // Heal with potion
+                        if (player.InventoryItems().Count == 0) // If there are no items in inventory display you have no items
                         {
                             Console.WriteLine("You have no items");
                             break;
                         }
                         Console.WriteLine("Choose a potion to heal with:");
                         List<string> temp2 = new List<string>();
-                        for (int i = 1; i <= player.InventoryItems().Count; i++)
+                        for (int i = 1; i <= player.InventoryItems().Count; i++) // Creates numbers for the number of items in inventory
                         {
                             temp2.Add(i.ToString());
                         }
                         count = 1;
                         foreach (Item x in player.InventoryItems())
                         {
-                            Console.WriteLine($"{x.GetItemName()}: {count}");
+                            Console.WriteLine($"{x.GetItemName()}: {count}"); // Displays each items with a number next to them which are the same as in the temp1 list
                             count++;
                         }
                         bool valid2 = false;
-                        while (!valid2)
+                        while (!valid2) // Loops while not a valid input
                         {
                             string choice = Console.ReadLine();
-                            if (!temp2.Contains(choice))
+                            if (!temp2.Contains(choice)) // Checks to see if the number is valid for the number of items in the inventory
                             {
                                 Console.WriteLine("Invalid input");
                             }
                             else
                             {
-                                if (player.InventoryItems()[int.Parse(choice) - 1] is Potion)
+                                if (player.InventoryItems()[int.Parse(choice) - 1] is Potion) // Checks to see if the item selected is a Potion
                                 {
                                     Potion myPotion = (Potion)player.InventoryItems()[int.Parse(choice) - 1];
-                                    player.Heal(myPotion);
+                                    player.Heal(myPotion); // Heals player with the potion and displays the info
                                     Console.WriteLine($"You have healed {myPotion.GetHealthStored()} health");
                                     Console.WriteLine($"You now have {player.GetHealth()} health left");
                                     valid2 = true;
@@ -220,13 +220,13 @@ namespace DungeonExplorer
                             }
                         }
                         break;
-                    case "3":
+                    case "3": // Run away from the enemy
                         hasRanAway = true;
                         Console.WriteLine($"You run away from the {enemy.name}");
-                        inBattle = false;
+                        inBattle = false; // Ends the battle loop
                         break;
                 }
-                if(enemy.GetHealth() <= 0)
+                if(enemy.GetHealth() <= 0) // Ends the battle loop if the enemy runs out of health
                 {
                     inBattle = false;
                 }
@@ -235,18 +235,18 @@ namespace DungeonExplorer
             {
                 return;
             }
-            Item droppedItem = enemy.DropItem(currentRoom);
-            currentRoom.SetItem(droppedItem);
+            Item droppedItem = enemy.DropItem(currentRoom); // Sets an item to an item dropped by the enemy
+            currentRoom.SetItem(droppedItem); // Sets the dropped item to an item in the room
             Console.WriteLine($"{enemy.name} has been defeated");
             Console.WriteLine($"{enemy.name} has dropped a {droppedItem.GetItemName()}");
             Console.WriteLine($"Would you like to pick up the {droppedItem.GetItemName()} y/n");
             currentRoom.HasEnemy(false);
-            if (Console.ReadLine().ToLower() == "y")
+            if (Console.ReadLine().ToLower() == "y") // If input is y picks up the item and removes it from the room
             {
                 player.PickUpItem(droppedItem, currentRoom);
                 Console.WriteLine("Item has been picked up");
             }
-            else if (Console.ReadLine().ToLower() == "n")
+            else if (Console.ReadLine().ToLower() == "n") // If input is n does not pick up the item and leaves it in the room to pick up later
             {
                 Console.WriteLine("Item has been dropped on the ground");
             }
