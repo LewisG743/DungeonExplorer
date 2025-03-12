@@ -79,5 +79,10 @@ namespace DungeonExplorer
                 this.modifier = modifiers[4];
             }
         }
+
+        public int GetWeaponDamage()
+        {
+            return this.weaponDamage;
+        }
     }
 }

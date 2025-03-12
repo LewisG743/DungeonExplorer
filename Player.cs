@@ -40,6 +40,23 @@ namespace DungeonExplorer
             }
         }
 
+        public List<Item> InventoryItems()
+        {
+            return inventory;
+        }
+
+        public bool HasItem(Item item)
+        { 
+            foreach(Item x in inventory)
+            {
+                if(item.GetItemName() == x.GetItemName())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public void TakeDamage(int damage) // Takes damage
         {
             if (damage > 0)
@@ -55,6 +72,11 @@ namespace DungeonExplorer
             {
                 health += healthHealed;
             }
+        }
+
+        public int GetHealth()
+        {
+            return health;
         }
     }
 }
