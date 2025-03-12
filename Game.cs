@@ -15,10 +15,14 @@ namespace DungeonExplorer
             Room room = new Room("Starting room. This room has nothing in it and is safe from enemies");
             currentRoom = room;
 
-            player = new Player("Input", 100);
+            player = new Player("", 100);
         }
         public void Start() // Starts the game flow
         {
+            Console.WriteLine("Enter a name for your player");
+            string name = Console.ReadLine();
+            player.name = name;
+            Console.WriteLine($"Your name is {player.name}");
             bool playing = true;
             Console.WriteLine("Welcome to Dungeon Explorer");
             Console.WriteLine("Room description: 1");
@@ -27,6 +31,7 @@ namespace DungeonExplorer
             Console.WriteLine("Search for items: 4");
             Console.WriteLine("Check inventory: 5");
             Console.WriteLine("Exit game: 6");
+            Console.WriteLine("Change name: 7");
             while (playing) // Loops until playing has finished
             {
                 switch (Console.ReadLine()) // Chooses the right case depending on what the player chooses
@@ -97,6 +102,11 @@ namespace DungeonExplorer
                         break;
                     case "6": // Exits the loop and ends the game
                         playing = false;
+                        break;
+                    case "7":
+                        Console.WriteLine("Enter a new name");
+                        player.name = Console.ReadLine();
+                        Console.WriteLine($"Your new name is {player.name}");
                         break;
                     default: // Does nothing if not a valid option
                         Console.WriteLine("Invalid option");

@@ -5,7 +5,7 @@ namespace DungeonExplorer
 {
     public class Player
     {
-        public string name { get; }
+        public string name { get; set; }
         private int health { get; set; }
         private List<Item> inventory = new List<Item>();
 
