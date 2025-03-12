@@ -20,7 +20,7 @@ namespace DungeonExplorer
                 string input = "";
                 while (validInput == false)
                 {
-                    input = Console.ReadLine();
+                    input = Console.ReadLine(); // Checks to see if the input is valid
                     if (input.ToUpper() == "S" || input.ToUpper() == "Q")
                     {
                         validInput = true;
@@ -30,12 +30,12 @@ namespace DungeonExplorer
                         
                     }
                 }
-                if (input.ToUpper() == "S")
+                if (input.ToUpper() == "S") // Starts the game
                 {
                     Game game = new Game();
-                    game.Start();
+                    game.Start(); 
                 }
-                else if (input.ToUpper() == "Q")
+                else if (input.ToUpper() == "Q") // Quits the game
                 {
                     break;
                 }

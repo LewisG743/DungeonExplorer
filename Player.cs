@@ -32,16 +32,15 @@ namespace DungeonExplorer
                 Console.WriteLine("Inventory is full");
             }
         }
-        public string InventoryContents()
+        public void InventoryContents() // Displays the inventory contents
         {
             foreach (Item item in inventory)
             {
                 Console.WriteLine(item.GetItemName());
             }
-            return string.Join(", ", inventory);
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damage) // Takes damage
         {
             if (damage > 0)
             {
@@ -49,7 +48,7 @@ namespace DungeonExplorer
             }
         }
 
-        public void Heal(Potion healthPotion)
+        public void Heal(Potion healthPotion) // Heals health from a potion
         {
             int healthHealed = healthPotion.GetHealthStored();
             if(healthHealed > 0)
