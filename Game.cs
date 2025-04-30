@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Media;
 using System.Threading;
+using DungeonExplorer.Creature;
+using DungeonExplorer.Items;
+using DungeonExplorer.World;
 
 namespace DungeonExplorer
 {

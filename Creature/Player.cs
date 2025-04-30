@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using DungeonExplorer.Creature;
+using DungeonExplorer.Items;
+using DungeonExplorer.World;
 
-namespace DungeonExplorer
+namespace DungeonExplorer.Creature
 {
     public class Player
     {
