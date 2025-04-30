@@ -5,18 +5,20 @@ namespace DungeonExplorer
 {
     public class Room
     {
+        private string[] descriptions = {"Safe Room", "Enemy Room", "Treasure Room", "Boss Room"};
         private string description;
         private List<char> doors;
         private List<Item> Items = new List<Item>();
         private Enemy enemy;
         public bool hasEnemy { get; private set; } // Can be read from outside the class but can only be changed inside the class
 
-        public Room(string description) // Initialises rooms description, if theres an enemy, a number of items and 
+        public Room() // Initialises rooms description, if theres an enemy, a number of items and 
                                         // a number of doors
         {
-            this.description = description;
+            Random rGen = new Random();
+            this.description = descriptions[rGen.Next(0,4)];
+            this.doors = new List<char>();
             SetItems();
-            SetDoors();
             SetEnemies();
         }
 
@@ -55,9 +57,9 @@ namespace DungeonExplorer
             this.Items.Add(item);
         }
 
-        private void SetDoors() // Creates an empty list of doors so the room has no doors in it
+        public void SetDoors(char direction) // Creates an empty list of doors so the room has no doors in it
         {
-            this.doors = new List<char>();
+            doors.Add(direction);
         }
 
         private void SetEnemies()

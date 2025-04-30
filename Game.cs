@@ -13,13 +13,21 @@ namespace DungeonExplorer
 
         public Game()
         {
-            // Initialises the game with one room and one player
-            Room room = new Room("Starting room. This room has some items in it and one enemy hidden");
-            currentRoom = room;
-
+            // Initialises the game with a map and one player
+            GameMap map = new GameMap();
+            currentRoom = map.GetCurrentRoom();
             player = new Player("", 100);
         }
-        public void Start() // Starts the game flow
+
+
+        public void Start()
+        {
+
+        }
+
+
+
+        /*public void Start() // Starts the game flow
         {
             Console.WriteLine("Enter a name for your player");
             string name = Console.ReadLine();
@@ -250,6 +258,6 @@ namespace DungeonExplorer
             {
                 Console.WriteLine("Item has been dropped on the ground");
             }
-        }
+        }*/
     }
 }
