@@ -10,24 +10,17 @@ namespace DungeonExplorer
     {
         private Player player;
         private Room currentRoom;
+        private GameMap map;
 
         public Game()
         {
             // Initialises the game with a map and one player
-            GameMap map = new GameMap();
+            map = new GameMap();
             currentRoom = map.GetCurrentRoom();
             player = new Player("", 100);
         }
 
-
-        public void Start()
-        {
-
-        }
-
-
-
-        /*public void Start() // Starts the game flow
+        public void Start() // Starts the game flow
         {
             Console.WriteLine("Enter a name for your player");
             string name = Console.ReadLine();
@@ -42,6 +35,7 @@ namespace DungeonExplorer
             Console.WriteLine("Check inventory: 5");
             Console.WriteLine("Exit game: 6");
             Console.WriteLine("Change name: 7");
+            Console.WriteLine("View map: 8");
             while (playing) // Loops until playing has finished
             {
                 switch (Console.ReadLine()) // Chooses the right case depending on what the player chooses
@@ -117,6 +111,9 @@ namespace DungeonExplorer
                         Console.WriteLine("Enter a new name");
                         player.name = Console.ReadLine();
                         Console.WriteLine($"Your new name is {player.name}");
+                        break;
+                    case "8":
+                        map.DisplayMap(currentRoom);
                         break;
                     default: // Does nothing if not a valid option
                         Console.WriteLine("Invalid option");
@@ -258,6 +255,6 @@ namespace DungeonExplorer
             {
                 Console.WriteLine("Item has been dropped on the ground");
             }
-        }*/
+        }
     }
 }

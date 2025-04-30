@@ -66,5 +66,29 @@ namespace DungeonExplorer
                 currentRoom.SetDoors('E');
             }
         }
+
+        public void DisplayMap(Room currentRoom)
+        {
+            Room[,] map = dungeon;
+            Console.WriteLine("\n");
+            for (int i = 0; i < map.GetLength(0); i++)
+            {
+                
+                for(int j = 0; j < map.GetLength(1); j++)
+                {
+                    Console.Write("[");
+                    if (map[i, j] == currentRoom)
+                    {
+                        Console.Write("c");
+                    }
+                    else
+                    {
+                        Console.Write(" ");
+                    }
+                    Console.Write("]");
+                }
+                Console.Write("\n");
+            }
+        }
     }
 }
