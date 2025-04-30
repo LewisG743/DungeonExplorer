@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Media;
@@ -9,14 +10,12 @@ namespace DungeonExplorer
     internal class Game
     {
         private Player player;
-        private Room currentRoom;
         private GameMap map;
 
         public Game()
         {
             // Initialises the game with a map and one player
             map = new GameMap();
-            currentRoom = map.GetCurrentRoom();
             player = new Player("", 100);
         }
 
@@ -29,7 +28,7 @@ namespace DungeonExplorer
             bool playing = true;
             Console.WriteLine("Welcome to Dungeon Explorer");
             Console.WriteLine("Room description: 1");
-            Console.WriteLine("Search for doors: 2");
+            Console.WriteLine("Move room: 2");
             Console.WriteLine("Scan for enemies: 3");
             Console.WriteLine("Search for items: 4");
             Console.WriteLine("Check inventory: 5");
@@ -41,32 +40,90 @@ namespace DungeonExplorer
                 switch (Console.ReadLine()) // Chooses the right case depending on what the player chooses
                 {
                     case "1": // Displays the current rooms description
-                        Console.WriteLine(currentRoom.GetDescription());
+                        Console.WriteLine(map.GetCurrentRoom().GetDescription());
                         break;
                     case "2": // Displays the doors in the room if there are any else says there are no doors
-                        var doors = currentRoom.GetDoors();
+                        var doors = map.GetCurrentRoom().GetDoors();
                         int doorCount = doors.Count;
-
                         if (doorCount == 0)
                         {
                             Console.WriteLine("There are no doors in this room");
                         }
                         else
                         {
-                            string doorMessage = "There are doors to the ";
-                            doorMessage += string.Join(", ", doors.Take(doorCount - 1));
+                            Console.WriteLine("What room do you want to move to (N/E/S/W)");
+                            string input = Console.ReadLine().ToLower();
+                            char choice = input[0];
+                            int currentRow = -1;
+                            int currentCol = -1;
+                            bool exitLoops = false;
 
-                            if (doorCount > 1)
+                            for (int i = 0; i < map.GetMapRows() && !exitLoops; i++)
                             {
-                                doorMessage += " and " + doors.Last();
+                                for (int j = 0; j < map.GetMapCols(); j++)
+                                {
+                                    if (map.GetDungeon()[i,j] == map.GetCurrentRoom())
+                                    {
+                                        currentRow = i;
+                                        currentCol = j;
+                                        exitLoops = true;
+                                        break;
+                                    }
+                                }
                             }
-                            Console.WriteLine(doorMessage);
+
+                            if (currentRow == -1 || currentCol == -1)
+                            {
+                                Console.WriteLine("Current room position not found");
+                                break;
+                            }
+
+                            if (!doors.Contains(choice))
+                            {
+                                Console.WriteLine(choice);
+                                Console.WriteLine("There is no way to go in that direction");
+                                break;
+                            }
+
+                            switch (choice)
+                            {
+                                case 'n':
+                                    if (map.GetCurrentRoom().GetDoors().Contains(choice))
+                                    {
+                                        map.SetCurrentRoom(map.GetDungeon()[currentRow - 1, currentCol]);
+                                        Console.WriteLine("Moved North");
+                                    }
+                                    break;
+                                case 'e':
+                                    if (map.GetCurrentRoom().GetDoors().Contains(choice))
+                                    {
+                                        map.SetCurrentRoom(map.GetDungeon()[currentRow, currentCol + 1]);
+                                        Console.WriteLine("Moved East");
+                                    }
+                                    break;
+                                case 's':
+                                    if (map.GetCurrentRoom().GetDoors().Contains(choice))
+                                    {
+                                        map.SetCurrentRoom(map.GetDungeon()[currentRow + 1, currentCol]);
+                                        Console.WriteLine("Moved South");
+                                    }
+                                    break;
+                                case 'w':
+                                    if (map.GetCurrentRoom().GetDoors().Contains(choice))
+                                    {
+                                        map.SetCurrentRoom(map.GetDungeon()[currentRow, currentCol - 1]);
+                                        Console.WriteLine("Moved West");
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                         break;
                     case "3": // Checks if there is an enemy if not tells the user there are no enemies if there is then starts a battle with the enter battle function
-                        if(currentRoom.hasEnemy == true)
+                        if(map.GetCurrentRoom().hasEnemy == true)
                         {
-                            EnterBattle(currentRoom.GetEnemy(), player);
+                            EnterBattle(map.GetCurrentRoom().GetEnemy(), player);
                         }
                         else
                         {
@@ -74,15 +131,15 @@ namespace DungeonExplorer
                         }
                         break;
                     case "4": // Searchs the room for items
-                        if(currentRoom.GetItems().Count == 0)
+                        if(map.GetCurrentRoom().GetItems().Count == 0)
                         {
                             Console.WriteLine("This room has no items in it");
                         }
                         else
                         {
                             Random rGen = new Random();
-                            int random = rGen.Next(currentRoom.GetItems().Count - 1); // Chooses a random item that is in the room
-                            Console.WriteLine($"There is a {currentRoom.GetItems()[random].GetItemName()}");
+                            int random = rGen.Next(map.GetCurrentRoom().GetItems().Count - 1); // Chooses a random item that is in the room
+                            Console.WriteLine($"There is a {map.GetCurrentRoom().GetItems()[random].GetItemName()}");
                             Console.WriteLine("Would you like to pick it up? y/n");
                             string choice = Console.ReadLine();
                             if (choice.ToLower() != "y" && choice.ToLower() != "n") // Pickup item yes or no
@@ -91,13 +148,13 @@ namespace DungeonExplorer
                             }
                             else if (choice.ToLower() == "y")
                             {
-                                player.PickUpItem(currentRoom.GetItems()[random], currentRoom); // Picks up the item and removes it from the room
+                                player.PickUpItem(map.GetCurrentRoom().GetItems()[random], map.GetCurrentRoom()); // Picks up the item and removes it from the room
                                 Console.WriteLine("Item has been added to your inventory");
                                 player.InventoryContents(); // Displays the players inventory
                             }
                             else if (choice.ToLower() == "n") // Does not pickup the item
                             {
-                                Console.WriteLine($"{currentRoom.GetItems()[random].GetItemName()} has been put back down");
+                                Console.WriteLine($"{map.GetCurrentRoom().GetItems()[random].GetItemName()} has been put back down");
                             }
                         }
                         break;
@@ -113,7 +170,7 @@ namespace DungeonExplorer
                         Console.WriteLine($"Your new name is {player.name}");
                         break;
                     case "8":
-                        map.DisplayMap(currentRoom);
+                        map.DisplayMap(map.GetCurrentRoom());
                         break;
                     default: // Does nothing if not a valid option
                         Console.WriteLine("Invalid option");
@@ -240,15 +297,15 @@ namespace DungeonExplorer
             {
                 return;
             }
-            Item droppedItem = enemy.DropItem(currentRoom); // Sets an item to an item dropped by the enemy
-            currentRoom.SetItem(droppedItem); // Sets the dropped item to an item in the room
+            Item droppedItem = enemy.DropItem(map.GetCurrentRoom()); // Sets an item to an item dropped by the enemy
+            map.GetCurrentRoom().SetItem(droppedItem); // Sets the dropped item to an item in the room
             Console.WriteLine($"{enemy.name} has been defeated");
             Console.WriteLine($"{enemy.name} has dropped a {droppedItem.GetItemName()}");
             Console.WriteLine($"Would you like to pick up the {droppedItem.GetItemName()} y/n");
-            currentRoom.HasEnemy(false);
+            map.GetCurrentRoom().HasEnemy(false);
             if (Console.ReadLine().ToLower() == "y") // If input is y picks up the item and removes it from the room
             {
-                player.PickUpItem(droppedItem, currentRoom);
+                player.PickUpItem(droppedItem, map.GetCurrentRoom());
                 Console.WriteLine("Item has been picked up");
             }
             else if (Console.ReadLine().ToLower() == "n") // If input is n does not pick up the item and leaves it in the room to pick up later

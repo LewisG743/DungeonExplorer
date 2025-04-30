@@ -40,6 +40,11 @@ namespace DungeonExplorer
         {
             return currentRoom;
         }
+
+        public Room[,] GetDungeon()
+        {
+            return dungeon;
+        }
         public void SetCurrentRoom(Room NewCurrentRoom)
         {
             currentRoom = NewCurrentRoom;
@@ -51,19 +56,19 @@ namespace DungeonExplorer
             int totalCols = map.GetLength(1);
             if (row > 0) // Room above
             {
-                currentRoom.SetDoors('N');
+                currentRoom.SetDoors('n');
             }
             if (row < totalRows - 1) // Room below
             {
-                currentRoom.SetDoors('S');
+                currentRoom.SetDoors('s');
             }
             if (col > 0) // Room left
             {
-                currentRoom.SetDoors('W');
+                currentRoom.SetDoors('w');
             }
             if (col < totalCols - 1) // Room right
             {
-                currentRoom.SetDoors('E');
+                currentRoom.SetDoors('e');
             }
         }
 
@@ -83,12 +88,22 @@ namespace DungeonExplorer
                     }
                     else
                     {
-                        Console.Write(" ");
+                        Console.Write(map[i, j].GetDescription()[0]);
                     }
                     Console.Write("]");
                 }
                 Console.Write("\n");
             }
+        }
+
+        public int GetMapRows()
+        {
+            return dungeon.GetLength(0);
+        }
+
+        public int GetMapCols()
+        {
+            return dungeon.GetLength(1);
         }
     }
 }

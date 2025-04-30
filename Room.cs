@@ -10,13 +10,13 @@ namespace DungeonExplorer
         private List<char> doors;
         private List<Item> Items = new List<Item>();
         private Enemy enemy;
+        private static Random rGen = new Random();
         public bool hasEnemy { get; private set; } // Can be read from outside the class but can only be changed inside the class
 
         public Room() // Initialises rooms description, if theres an enemy, a number of items and 
                                         // a number of doors
         {
-            Random rGen = new Random();
-            this.description = descriptions[rGen.Next(0,4)];
+            this.description = descriptions[rGen.Next(0,descriptions.Length)];
             this.doors = new List<char>();
             SetItems();
             SetEnemies();
