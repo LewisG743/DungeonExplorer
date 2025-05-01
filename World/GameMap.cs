@@ -23,9 +23,7 @@ namespace DungeonExplorer.World
             {
                 for (int j = 0; j < height; j++)
                 {
-                    dungeon[i, j].description = "Boss Room";
-                    dungeon[i, j].enemy = new Dragon();
-                    dungeon[i, j].HasEnemy = true;
+                    dungeon[i, j] = new Room();
                 }
             }
             
@@ -49,7 +47,9 @@ namespace DungeonExplorer.World
                     ZeroZero = false;
                 }
             }
-            dungeon[randI, randJ] = new Room();
+            dungeon[randI, randJ].description = "Boss Room";
+            dungeon[randI, randJ].HasEnemy = true;
+            dungeon[randI, randJ].enemy = new Dragon();
             currentRoom = dungeon[0, 0];
         }
 
