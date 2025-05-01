@@ -7,7 +7,7 @@ using DungeonExplorer.Items;
 
 namespace DungeonExplorer.Items
 {
-    public class DragonScale : Item
+    public class DragonScale : Item // Dragon scale item (filler)
     {
         public DragonScale() : base("Dragon Scale")
         {

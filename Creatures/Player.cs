@@ -7,7 +7,7 @@ using DungeonExplorer.World;
 
 namespace DungeonExplorer.Creatures
 {
-    public class Player : Creature,IDamagable
+    public class Player : Creature,IDamagable // Inheritance from Creature class and IDamagable implemented
     {
         private List<Item> inventory = new List<Item>();
         private int Defence;
@@ -23,7 +23,7 @@ namespace DungeonExplorer.Creatures
             CurrentHealth -= damage * Defence/100; 
         }
 
-        public void PickUpItem(Item item)
+        public void PickUpItem(Item item) // picks up items
         {
             if (inventory.Count < 10)
             {
@@ -34,24 +34,7 @@ namespace DungeonExplorer.Creatures
                 Console.WriteLine("Inventory is full");
             }
         }
-        /*public void PickUpItem(Item item, Room room)
-        {
-            if (inventory.Count < 10) // Checks to see if inventory is full
-            {
-                inventory.Add(item); // Adds the item found to inventory
-                for (int i = room.GetItems().Count - 1; i >= 0; i--)
-                {
-                    if (room.GetItems()[i].GetID() == item.GetID()) // Checks to see if the items are the same item
-                    {
-                        room.GetItems().Remove(room.GetItems()[i]); // removes the item from the room 
-                    }
-                }
-            }
-            else
-            {
-                Console.WriteLine("Inventory is full");
-            }
-        }*/
+        
         public void InventoryContents() // Displays the inventory contents
         {
             foreach (Item item in inventory)
@@ -60,12 +43,12 @@ namespace DungeonExplorer.Creatures
             }
         }
 
-        public List<Item> InventoryItems()
+        public List<Item> InventoryItems() // returns the inventory
         {
             return inventory;
         }
 
-        public bool HasItem(Item item)
+        public bool HasItem(Item item) // checks if an item is in the inventory
         { 
             foreach(Item x in inventory)
             {

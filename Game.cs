@@ -54,7 +54,7 @@ namespace DungeonExplorer
                         }
                         else
                         {
-                            Console.WriteLine("What room do you want to move to (N/E/S/W)");
+                            Console.WriteLine("What room do you want to move to (N/E/S/W)"); // chooses which direction the player wants to move
                             string input = Console.ReadLine().ToLower();
                             char choice = input[0];
                             int currentRow = -1;
@@ -65,7 +65,7 @@ namespace DungeonExplorer
                             {
                                 for (int j = 0; j < map.GetMapCols(); j++)
                                 {
-                                    if (map.GetDungeon()[i,j] == map.GetCurrentRoom())
+                                    if (map.GetDungeon()[i,j] == map.GetCurrentRoom()) // gets the coordinates of current room
                                     {
                                         currentRow = i;
                                         currentCol = j;
@@ -75,20 +75,20 @@ namespace DungeonExplorer
                                 }
                             }
 
-                            if (currentRow == -1 || currentCol == -1)
+                            if (currentRow == -1 || currentCol == -1) // if current room isnt found
                             {
                                 Console.WriteLine("Current room position not found");
                                 break;
                             }
 
-                            if (!doors.Contains(choice))
+                            if (!doors.Contains(choice)) // if there is no room in that direction
                             {
                                 Console.WriteLine(choice);
                                 Console.WriteLine("There is no way to go in that direction");
                                 break;
                             }
 
-                            switch (choice)
+                            switch (choice) // changes the current room to one in that direction
                             {
                                 case 'n':
                                     if (map.GetCurrentRoom().GetDoors().Contains(choice))

@@ -7,7 +7,7 @@ using DungeonExplorer.Items;
 
 namespace DungeonExplorer.Interfaces
 {
-    public interface IConsumable
+    public interface IConsumable // IConsumable interface with Consume function
     {
         void Consume(Item item);
     }

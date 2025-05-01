@@ -7,7 +7,7 @@ using DungeonExplorer.Items;
 
 namespace DungeonExplorer.Interfaces
 {
-    public interface ILootable
+    public interface ILootable // ILootable with Loot function
     {
         Item Loot();
     }

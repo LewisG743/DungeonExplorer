@@ -10,7 +10,7 @@ using DungeonExplorer.Creatures;
 
 namespace DungeonExplorer.Creatures
 {
-    public class Dragon : Creature,ILootable,IDamagable
+    public class Dragon : Creature,ILootable,IDamagable // Inheritance from Creature class and implementation of multiple interfaces
     {
         private List<Item> _items = new List<Item>();
         public Dragon() : base("Dragon", 300, 25, 20)
@@ -19,7 +19,7 @@ namespace DungeonExplorer.Creatures
             _items.Add(new DragonScale());
         }
 
-        public override void TakeDamage(int amount)
+        public override void TakeDamage(int amount) // Overrided from base class and required from the IDamagable interface
         {
             CurrentHealth -= amount;
             Console.WriteLine("The dragon screams in pain");

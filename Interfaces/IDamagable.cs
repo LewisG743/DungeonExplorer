@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonExplorer.Interfaces
 {
-    public interface IDamagable
+    public interface IDamagable // IDamagable interface with TakeDamage Function
     {
         void TakeDamage(int amount);
     }

@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace DungeonExplorer.World
 {
-    public class GameMap
+    public class GameMap // GameMap handles multiple connected rooms
     {
         private Room[,] dungeon = new Room[6, 6];
-        private Room currentRoom;
+        private Room currentRoom; // sets current room
         public GameMap()
         {
             int width = dungeon.GetLength(0);
@@ -23,7 +23,7 @@ namespace DungeonExplorer.World
             {
                 for (int j = 0; j < height; j++)
                 {
-                    dungeon[i, j] = new Room();
+                    dungeon[i, j] = new Room(); // Assigns each cell in the 2d array a new room
                 }
             }
             
@@ -32,13 +32,13 @@ namespace DungeonExplorer.World
                 for(int j = 0;j < height; j++)
                 {
                     currentRoom = dungeon[i, j];
-                    GetAdjacentRooms(dungeon, currentRoom, i, j);
+                    GetAdjacentRooms(dungeon, currentRoom, i, j); // Checks the adjacent rooms and sets doors (directions) for each room
                 }
             }
             bool ZeroZero = true;
             int randI = -1;
             int randJ = -1;
-            while (ZeroZero)
+            while (ZeroZero) // makes sure that the room at 0,0 is not a boss room
             {
                 randI = RandomProvider.rGen.Next(0, dungeon.GetLength(0));
                 randJ = RandomProvider.rGen.Next(0, dungeon.GetLength(1));
@@ -47,27 +47,28 @@ namespace DungeonExplorer.World
                     ZeroZero = false;
                 }
             }
+            // changes the specified room to a boss room
             dungeon[randI, randJ].description = "Boss Room";
             dungeon[randI, randJ].HasEnemy = true;
             dungeon[randI, randJ].enemy = new Dragon();
             currentRoom = dungeon[0, 0];
         }
 
-        public Room GetCurrentRoom()
+        public Room GetCurrentRoom() // gets the current room
         {
             return currentRoom;
         }
 
-        public Room[,] GetDungeon()
+        public Room[,] GetDungeon() // gets the dungeon map
         {
             return dungeon;
         }
-        public void SetCurrentRoom(Room NewCurrentRoom)
+        public void SetCurrentRoom(Room NewCurrentRoom) // sets current room
         {
             currentRoom = NewCurrentRoom;
         }
 
-        public void GetAdjacentRooms(Room[,] map, Room currentRoom, int row, int col)
+        public void GetAdjacentRooms(Room[,] map, Room currentRoom, int row, int col) // sets doors if there are adjacent rooms
         {
             int totalRows = map.GetLength(0);
             int totalCols = map.GetLength(1);
@@ -89,7 +90,7 @@ namespace DungeonExplorer.World
             }
         }
 
-        public void DisplayMap(Room currentRoom)
+        public void DisplayMap(Room currentRoom) // displays the map and which type of room each room is
         {
             Room[,] map = dungeon;
             Console.WriteLine("\n");

@@ -17,10 +17,9 @@ namespace DungeonExplorer.World
         public Creature enemy;
         public bool HasEnemy { get; set; } 
 
-        public Room() // Initialises rooms description, if theres an enemy, a number of items and 
-                                        // a number of doors
+        public Room() // Initialises a room with a random description and sets the necessary items and/or enemies
         {
-            description = descriptions[rGen.Next(0,descriptions.Length)];
+            description = descriptions[rGen.Next(0,descriptions.Length)]; 
             doors = new List<char>();
             if(description == "Safe Room")
             {
@@ -64,7 +63,7 @@ namespace DungeonExplorer.World
             }
         }
 
-        public void SetItem(Item item)
+        public void SetItem(Item item) // sets items in the room
         {
             this.Items.Add(item);
         }
