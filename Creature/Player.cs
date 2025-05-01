@@ -1,29 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using DungeonExplorer.Creature;
+using DungeonExplorer.Interfaces;
 using DungeonExplorer.Items;
 using DungeonExplorer.World;
 
 namespace DungeonExplorer.Creature
 {
-    public class Player
+    public class Player : Creature,IDamagable
     {
-        public string name { get; set; }
-        private int health { get; set; }
         private List<Item> inventory = new List<Item>();
+        private int Defence;
 
-        public Player(string Name, int initialHealth) 
+        public Player(string name) : base(name, 100, 10, 10) 
         {
-            name = Name;
-            health = initialHealth;
+            Name = name;
+            Defence = 50;
         }
 
+        public override void TakeDamage(int damage)
+        {
+            CurrentHealth -= damage * Defence/100; 
+        }
 
         public void PickUpItem(Item item)
         {
             if (inventory.Count < 10)
             {
                 inventory.Add(item);
+            }
+            else
+            {
+                Console.WriteLine("Inventory is full");
             }
         }
         /*public void PickUpItem(Item item, Room room)
@@ -69,26 +77,13 @@ namespace DungeonExplorer.Creature
             return false;
         }
 
-        public void TakeDamage(int damage) // Takes damage
-        {
-            if (damage > 0)
-            {
-                health -= damage;
-            }
-        }
-
         public void Heal(Potion healthPotion) // Heals health from a potion
         {
             int healthHealed = healthPotion.GetHealthStored();
             if(healthHealed > 0)
             {
-                health += healthHealed;
+                CurrentHealth += healthHealed;
             }
-        }
-
-        public int GetHealth()
-        {
-            return health;
         }
     }
 }

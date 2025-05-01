@@ -12,7 +12,7 @@ namespace DungeonExplorer.Items
 
         public Item(string itemName) // Initialises an item with an ID and name
         {
-            this.ItemName = itemName;
+            ItemName = itemName;
         }
 
         public string GetItemName() // Returns the ItemName

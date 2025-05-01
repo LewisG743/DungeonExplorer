@@ -46,10 +46,10 @@
   <ItemGroup>
     <Compile Include="Creature\Creature.cs" />
     <Compile Include="Creature\Dragon.cs" />
+    <Compile Include="Creature\Orc.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Interfaces\IConsumable.cs" />
     <Compile Include="Interfaces\IDamagable.cs" />
-    <Compile Include="Interfaces\IDropable.cs" />
     <Compile Include="Interfaces\ILootable.cs" />
     <Compile Include="Items\DragonScale.cs" />
     <Compile Include="Items\Potion.cs" />

@@ -19,15 +19,15 @@ namespace DungeonExplorer
         {
             // Initialises the game with a map and one player
             map = new GameMap();
-            player = new Player("", 100);
+            player = new Player("");
         }
 
         public void Start() // Starts the game flow
         {
             Console.WriteLine("Enter a name for your player");
             string name = Console.ReadLine();
-            player.name = name;
-            Console.WriteLine($"Your name is {player.name}");
+            player.Name = name;
+            Console.WriteLine($"Your name is {player.Name}");
             bool playing = true;
             Console.WriteLine("Welcome to Dungeon Explorer");
             Console.WriteLine("Room description: 1");
@@ -169,8 +169,8 @@ namespace DungeonExplorer
                         break;
                     case "7":
                         Console.WriteLine("Enter a new name");
-                        player.name = Console.ReadLine();
-                        Console.WriteLine($"Your new name is {player.name}");
+                        player.Name = Console.ReadLine();
+                        Console.WriteLine($"Your new name is {player.Name}");
                         break;
                     case "8":
                         map.DisplayMap(map.GetCurrentRoom());

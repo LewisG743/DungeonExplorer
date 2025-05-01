@@ -9,20 +9,13 @@ using DungeonExplorer.Utils;
 
 namespace DungeonExplorer.Creature
 {
-    public class Dragon : Creature,ILootable,IDamagable
+    public class Orc : Creature,IDamagable,ILootable
     {
         private List<Item> _items = new List<Item>();
-        public Dragon() : base("Dragon", 300, 25, 20)
-        {
-            _items.Add(new DragonScale());
-            _items.Add(new DragonScale());
-        }
 
-        public override void TakeDamage(int amount)
+        public Orc() : base("Orc", 100, 5, 5)
         {
-            CurrentHealth -= amount;
-            Console.WriteLine("The dragon screams in pain");
-            Console.WriteLine($"You have delt {amount} damage to the dragon: {CurrentHealth}/{MaxHealth}");
+            _items.Add(new Potion());
         }
 
         public Item Loot()
@@ -35,6 +28,13 @@ namespace DungeonExplorer.Creature
             Item item = _items[index];
             _items.RemoveAt(index);
             return item;
+        }
+
+        public override void TakeDamage(int amount)
+        {
+            CurrentHealth -= amount;
+            Console.WriteLine("The orc let out a deep, blood-curdling howl");
+            Console.WriteLine($"You have delt {amount} damage to the orc: {CurrentHealth}/{MaxHealth}");
         }
     }
 }
