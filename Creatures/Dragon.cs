@@ -26,6 +26,11 @@ namespace DungeonExplorer.Creatures
             Console.WriteLine($"You have delt {amount} damage to the dragon: {CurrentHealth}/{MaxHealth}");
         }
 
+        public List<Item> Items()
+        {
+            return _items;
+        }
+
         public Item Loot()
         {
             if (_items.Count == 0)

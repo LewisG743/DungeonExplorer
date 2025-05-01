@@ -10,5 +10,7 @@ namespace DungeonExplorer.Interfaces
     public interface ILootable // ILootable with Loot function
     {
         Item Loot();
+
+        List<Item> Items();
     }
 }

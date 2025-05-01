@@ -19,6 +19,10 @@ namespace DungeonExplorer.Creatures
             _items.Add(new Potion());
         }
 
+        public List<Item> Items()
+        {
+            return _items;
+        }
         public Item Loot() // Requires Loot() function due to the ILootable interface
                            // Checks to see if the items on the enemy is empty
         {

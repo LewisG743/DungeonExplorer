@@ -10,7 +10,7 @@ namespace DungeonExplorer.Creatures
     public class Player : Creature,IDamagable // Inheritance from Creature class and IDamagable implemented
     {
         private List<Item> inventory = new List<Item>();
-        private int Defence;
+        public int Defence { get; private set; }
 
         public Player(string name) : base(name, 100, 10, 10) 
         {

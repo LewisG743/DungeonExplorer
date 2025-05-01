@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DungeonExplorer.Items;
 using DungeonExplorer.Creatures;
 using System.Xml.Serialization;
+using System.Runtime.InteropServices;
 
 namespace DungeonExplorer.Creatures
 {
@@ -36,6 +37,7 @@ namespace DungeonExplorer.Creatures
                     {
                         validInput = true;
                         _player.Attack(_enemy);
+                        Console.WriteLine($"You have attacked the {_enemy.Name} and delt {_player.BaseDamage} damage to the {_enemy.Name}");
                     }
                     else if (choice == "2")
                     {
@@ -52,6 +54,16 @@ namespace DungeonExplorer.Creatures
                         validInput = false;
                     }
                 }
+                Console.WriteLine($"The {_enemy.Name} attacks you and deals {_enemy.BaseDamage * _player.Defence / 100} damage to you");
+                _enemy.Attack(_player);
+            }
+            if (_player.CurrentHealth <= 0)
+            {
+                Console.WriteLine("You lost");
+            }
+            else if (_enemy.CurrentHealth <= 0)
+            {
+                Console.WriteLine($"You have defeated the {_enemy.Name}");
             }
         }
 

@@ -128,6 +128,9 @@ namespace DungeonExplorer
                         {
                             Console.WriteLine("Room has enemy");
                             Console.WriteLine($"That enemy is a {map.GetCurrentRoom().enemy.Name}");
+                            Console.WriteLine($"You have been forced into battle with the {map.GetCurrentRoom().enemy.Name}");
+                            Battle newBattle = new Battle(player, map.GetCurrentRoom().enemy);
+                            newBattle.Start();
                         }
                         else
                         {
