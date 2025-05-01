@@ -9,7 +9,7 @@ using DungeonExplorer.World;
 
 namespace DungeonExplorer.Creature
 {
-    public class Enemy
+    public class Enemy : Creature 
     {
         private int health;
         public string name { get; }

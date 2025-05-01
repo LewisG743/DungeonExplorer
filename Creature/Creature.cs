@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DungeonExplorer.Creature;
+using DungeonExplorer.Interfaces;
 using DungeonExplorer.Items;
 using DungeonExplorer.World;
 
 namespace DungeonExplorer.Creature
 {
-    public abstract class Creature
+    public abstract class Creature : IDamagable
     {
         public string Name { get; set; }
 
@@ -34,7 +35,7 @@ namespace DungeonExplorer.Creature
             CurrentHealth -= damage;
         }
 
-        public virtual void DealDamage(Creature creature)
+        public virtual void Attack(Creature creature)
         {
             creature.TakeDamage(BaseDamage);
         }

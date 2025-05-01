@@ -44,8 +44,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Creature\Creature.cs" />
+    <Compile Include="Creature\Dragon.cs" />
     <Compile Include="Creature\Enemy.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Interfaces\IConsumable.cs" />
+    <Compile Include="Interfaces\IDamagable.cs" />
+    <Compile Include="Interfaces\IDropable.cs" />
+    <Compile Include="Interfaces\ILootable.cs" />
+    <Compile Include="Items\DragonScale.cs" />
+    <Compile Include="Items\Potion.cs" />
+    <Compile Include="Items\Weapon.cs" />
+    <Compile Include="Utils\RandomProvider.cs" />
     <Compile Include="World\GameMap.cs" />
     <Compile Include="Items\Item.cs" />
     <Compile Include="Creature\Player.cs" />
@@ -56,8 +65,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

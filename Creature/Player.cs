@@ -17,7 +17,16 @@ namespace DungeonExplorer.Creature
             name = Name;
             health = initialHealth;
         }
-        public void PickUpItem(Item item, Room room)
+
+
+        public void PickUpItem(Item item)
+        {
+            if (inventory.Count < 10)
+            {
+                inventory.Add(item);
+            }
+        }
+        /*public void PickUpItem(Item item, Room room)
         {
             if (inventory.Count < 10) // Checks to see if inventory is full
             {
@@ -34,7 +43,7 @@ namespace DungeonExplorer.Creature
             {
                 Console.WriteLine("Inventory is full");
             }
-        }
+        }*/
         public void InventoryContents() // Displays the inventory contents
         {
             foreach (Item item in inventory)
