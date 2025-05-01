@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Creatures\Battle.cs" />
     <Compile Include="Creatures\Creature.cs" />
     <Compile Include="Creatures\Dragon.cs" />
     <Compile Include="Creatures\Orc.cs" />

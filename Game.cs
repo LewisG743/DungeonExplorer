@@ -126,7 +126,8 @@ namespace DungeonExplorer
                     case "3": // Checks if there is an enemy if not tells the user there are no enemies if there is then starts a battle with the enter battle function
                         if(map.GetCurrentRoom().HasEnemy == true)
                         {
-                            
+                            Console.WriteLine("Room has enemy");
+                            Console.WriteLine($"That enemy is a {map.GetCurrentRoom().enemy.Name}");
                         }
                         else
                         {

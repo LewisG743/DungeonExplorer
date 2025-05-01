@@ -39,5 +39,7 @@ namespace DungeonExplorer.Creatures
         {
             creature.TakeDamage(BaseDamage);
         }
+
+
     }
 }

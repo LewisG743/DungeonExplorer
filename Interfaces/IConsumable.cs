@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DungeonExplorer.Creatures;
 using DungeonExplorer.Items;
 
 namespace DungeonExplorer.Interfaces
 {
     public interface IConsumable // IConsumable interface with Consume function
     {
-        void Consume(Item item);
+        void Consume(List<Item> items, Player player);
     }
 }

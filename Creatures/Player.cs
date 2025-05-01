@@ -63,7 +63,11 @@ namespace DungeonExplorer.Creatures
         public void Heal(Potion healthPotion) // Heals health from a potion
         {
             int healthHealed = healthPotion.GetHealthStored();
-            if(healthHealed > 0)
+            if (CurrentHealth + healthHealed >= MaxHealth)
+            {
+                CurrentHealth = MaxHealth;
+            }
+            else
             {
                 CurrentHealth += healthHealed;
             }
