@@ -12,7 +12,6 @@ namespace DungeonExplorer.World
         private string description;
         private List<char> doors;
         private List<Item> Items = new List<Item>();
-        private Enemy enemy;
         private static Random rGen = new Random();
         public bool hasEnemy { get; private set; } // Can be read from outside the class but can only be changed inside the class
 
@@ -41,7 +40,7 @@ namespace DungeonExplorer.World
                             this.Items.Add(weapon);
                             break;
                         case 1:
-                            Potion potion = new Potion(count, "Health Potion");
+                            Potion potion = new Potion();
                             this.Items.Add(potion);
                             break;
                     }
@@ -67,17 +66,7 @@ namespace DungeonExplorer.World
 
         private void SetEnemies()
         {
-            Random rGen = new Random();
-            if(rGen.Next(100) > 0)
-            {
-                this.hasEnemy = true;
-                this.enemy = new Enemy("Wolf");
-            }
-            else
-            {
-                this.hasEnemy = false;
-                this.enemy = null;
-            }
+            
         }
 
         public string GetDescription() // Returns the discription of the room
@@ -94,11 +83,5 @@ namespace DungeonExplorer.World
         {
             return Items;
         }
-
-        public Enemy GetEnemy()
-        {
-            return this.enemy;
-        }
-
     }
 }

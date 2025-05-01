@@ -126,7 +126,7 @@ namespace DungeonExplorer
                     case "3": // Checks if there is an enemy if not tells the user there are no enemies if there is then starts a battle with the enter battle function
                         if(map.GetCurrentRoom().hasEnemy == true)
                         {
-                            EnterBattle(map.GetCurrentRoom().GetEnemy(), player);
+                            
                         }
                         else
                         {
@@ -151,7 +151,7 @@ namespace DungeonExplorer
                             }
                             else if (choice.ToLower() == "y")
                             {
-                                player.PickUpItem(map.GetCurrentRoom().GetItems()[random], map.GetCurrentRoom()); // Picks up the item and removes it from the room
+                                //player.PickUpItem(map.GetCurrentRoom().GetItems()[random], map.GetCurrentRoom()); // Picks up the item and removes it from the room
                                 Console.WriteLine("Item has been added to your inventory");
                                 player.InventoryContents(); // Displays the players inventory
                             }
@@ -182,7 +182,7 @@ namespace DungeonExplorer
             }
         }
 
-        private void EnterBattle(Enemy enemy, Player player) // Starts a battle with the enemy in the current room
+        /*private void EnterBattle(Enemy enemy, Player player) // Starts a battle with the enemy in the current room
         {
             bool hasRanAway = false;
             bool inBattle = true;
@@ -315,6 +315,6 @@ namespace DungeonExplorer
             {
                 Console.WriteLine("Item has been dropped on the ground");
             }
-        }
+        }*/
     }
 }

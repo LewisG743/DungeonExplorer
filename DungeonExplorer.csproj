@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,7 +46,6 @@
   <ItemGroup>
     <Compile Include="Creature\Creature.cs" />
     <Compile Include="Creature\Dragon.cs" />
-    <Compile Include="Creature\Enemy.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Interfaces\IConsumable.cs" />
     <Compile Include="Interfaces\IDamagable.cs" />
