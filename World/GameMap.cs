@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DungeonExplorer.Creatures;
+using DungeonExplorer.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -21,7 +23,9 @@ namespace DungeonExplorer.World
             {
                 for (int j = 0; j < height; j++)
                 {
-                    dungeon[i, j] = new Room();
+                    dungeon[i, j].description = "Boss Room";
+                    dungeon[i, j].enemy = new Dragon();
+                    dungeon[i, j].HasEnemy = true;
                 }
             }
             
@@ -33,6 +37,19 @@ namespace DungeonExplorer.World
                     GetAdjacentRooms(dungeon, currentRoom, i, j);
                 }
             }
+            bool ZeroZero = true;
+            int randI = -1;
+            int randJ = -1;
+            while (ZeroZero)
+            {
+                randI = RandomProvider.rGen.Next(0, dungeon.GetLength(0));
+                randJ = RandomProvider.rGen.Next(0, dungeon.GetLength(1));
+                if (!(randI == 0 && randJ == 0))
+                {
+                    ZeroZero = false;
+                }
+            }
+            dungeon[randI, randJ] = new Room();
             currentRoom = dungeon[0, 0];
         }
 
@@ -88,7 +105,7 @@ namespace DungeonExplorer.World
                     }
                     else
                     {
-                        Console.Write(map[i, j].GetDescription()[0]);
+                        Console.Write(map[i, j].description[0]);
                     }
                     Console.Write("]");
                 }

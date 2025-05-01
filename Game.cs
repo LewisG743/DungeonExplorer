@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Media;
 using System.Threading;
-using DungeonExplorer.Creature;
+using DungeonExplorer.Creatures;
 using DungeonExplorer.Items;
 using DungeonExplorer.World;
 
@@ -43,7 +43,7 @@ namespace DungeonExplorer
                 switch (Console.ReadLine()) // Chooses the right case depending on what the player chooses
                 {
                     case "1": // Displays the current rooms description
-                        Console.WriteLine(map.GetCurrentRoom().GetDescription());
+                        Console.WriteLine(map.GetCurrentRoom().description);
                         break;
                     case "2": // Displays the doors in the room if there are any else says there are no doors
                         var doors = map.GetCurrentRoom().GetDoors();
@@ -124,7 +124,7 @@ namespace DungeonExplorer
                         }
                         break;
                     case "3": // Checks if there is an enemy if not tells the user there are no enemies if there is then starts a battle with the enter battle function
-                        if(map.GetCurrentRoom().hasEnemy == true)
+                        if(map.GetCurrentRoom().HasEnemy == true)
                         {
                             
                         }

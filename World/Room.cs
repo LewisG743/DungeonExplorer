@@ -1,27 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using DungeonExplorer.Creature;
+using DungeonExplorer.Creatures;
 using DungeonExplorer.Items;
 using DungeonExplorer.World;
+using DungeonExplorer.Interfaces;
 
 namespace DungeonExplorer.World
 {
     public class Room
     {
-        private string[] descriptions = {"Safe Room", "Enemy Room", "Treasure Room", "Boss Room"};
-        private string description;
+        private string[] descriptions = {"Safe Room", "Enemy Room", "Treasure Room"};
+        public string description { get; set; }
         private List<char> doors;
         private List<Item> Items = new List<Item>();
         private static Random rGen = new Random();
-        public bool hasEnemy { get; private set; } // Can be read from outside the class but can only be changed inside the class
+        public Creature enemy;
+        public bool HasEnemy { get; set; } 
 
         public Room() // Initialises rooms description, if theres an enemy, a number of items and 
                                         // a number of doors
         {
-            this.description = descriptions[rGen.Next(0,descriptions.Length)];
-            this.doors = new List<char>();
-            SetItems();
-            SetEnemies();
+            description = descriptions[rGen.Next(0,descriptions.Length)];
+            doors = new List<char>();
+            if(description == "Safe Room")
+            {
+                HasEnemy = false;
+            }
+            else if (description == "Treasure Room")
+            {
+                HasEnemy = false;
+                SetItems();
+            }
+
+            if (description == "Enemy Room")
+            {
+                enemy = new Orc();
+                HasEnemy = true;
+            }
         }
 
         private void SetItems()
@@ -49,11 +64,6 @@ namespace DungeonExplorer.World
             }
         }
 
-        public void HasEnemy(bool boolean)
-        {
-            this.hasEnemy = boolean;
-        }
-
         public void SetItem(Item item)
         {
             this.Items.Add(item);
@@ -62,16 +72,6 @@ namespace DungeonExplorer.World
         public void SetDoors(char direction) // Creates an empty list of doors so the room has no doors in it
         {
             doors.Add(direction);
-        }
-
-        private void SetEnemies()
-        {
-            
-        }
-
-        public string GetDescription() // Returns the discription of the room
-        {
-            return description; 
         }
 
         public List<char> GetDoors() // Returns the doors in the room

@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using DungeonExplorer.Items;
 using DungeonExplorer.Utils;
+using DungeonExplorer.Creatures;
 
-namespace DungeonExplorer.Creature
+namespace DungeonExplorer.Creatures
 {
     public class Dragon : Creature,ILootable,IDamagable
     {

@@ -4,12 +4,12 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DungeonExplorer.Creature;
+using DungeonExplorer.Creatures;
 using DungeonExplorer.Interfaces;
 using DungeonExplorer.Items;
 using DungeonExplorer.World;
 
-namespace DungeonExplorer.Creature
+namespace DungeonExplorer.Creatures
 {
     public abstract class Creature : IDamagable
     {

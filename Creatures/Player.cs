@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using DungeonExplorer.Creature;
+using DungeonExplorer.Creatures;
 using DungeonExplorer.Interfaces;
 using DungeonExplorer.Items;
 using DungeonExplorer.World;
 
-namespace DungeonExplorer.Creature
+namespace DungeonExplorer.Creatures
 {
     public class Player : Creature,IDamagable
     {
